@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Info</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <script>
+
+
+        'use strict';
+
+        // Declare app level module which depends on views, and components
+        var myApp = angular.module('myApp', [])
+
+
+            .controller('View1Ctrl', function ($scope, $http) {
+
+                $scope.searchMovie = function () {
+
+                    var movie = document.getElementById("movieName").value;
+                    if (movie != null && movie != "") {
+                        //This is the API that gives the list of venues based on the place and search query.
+                        $http.get("http://www.omdbapi.com/?" + "t=" + movie + "&y=&plot=full&r=json").then(function (response) {
+                            console.log(response.data);
+                            if (response.data != null && response.data != undefined) {
+
+                                $scope.myvalue=true;
+                                console.log(response.data.Year);
+                                $scope.Poster = response.data.Poster;
+                                $scope.Title = response.data.Title;
+                                $scope.Released = response.data.Released;
+                                $scope.Runtime = response.data.Runtime;
+                                $scope.Genre = response.data.Genre;
+                                $scope.Director = response.data.Director;
+                                $scope.Writer = response.data.Writer;
+                                $scope.Actors = response.data.Actors;
+                                $scope.Language = response.data.Language;
+                                $scope.Country = response.data.Country;
+                                $scope.Awards = response.data.Awards;
+                                $scope.imdbRating = response.data.imdbRating;
+                                $scope.Plot = response.data.Plot;
+
+//
+                            }
+                        }, function (response) {
+                            alert("There was some error processing your request. Please try after some time.");
+                        });
+                    }
+                }
+
+            });
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="View1Ctrl"
+      style="background-image: url(images/moviebackground.jpg);background-repeat: no-repeat;background-size: cover">
+<nav class="navbar navbar-light bg-faded">
+
+    <div class="col-sm-10">
+        <h2 style="padding-left: 20px;">Welcome to Movie Zone</h2>
+    </div>
+    <a href="index.html" class="btn btn-link" id="logout" style="padding-top: 30px; font-weight: 900;font-size: 18px">Logout
+        <span>
+    <i class="glyphicon glyphicon-off"></i>
+    </span></a></br>
+    <div class="col-sm-5">
+        <h4 style="padding-left: 20px">Search for movie information</h4>
+    </div>
+
+
+</nav>
+<div class="form-group">
+    <div class="col-xs-4" style="padding-left: 20px">
+        <input class="form-control" id="movieName" type="text" placeholder="Movie name">
+    </div>
+    <button type="submit" ng-click="searchMovie()" class="btn btn-primary">Search</button>
+</div>
+<div style="padding-left: 20px;padding-top: 20px">
+    <div class="row" id="displayDiv" style="padding-left: 20px;" ng-show="myvalue" class="ng-cloak">
+        <div class="col-sm-3" style="background-color:whitesmoke;">
+            <table>
+                <tr>
+                    <td><img src="{{Poster}}" style="height:400px" class="img-thumbnail" alt="Poster" width="304"
+                             height="200"></td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-sm-8" style="background-color:whitesmoke;">
+            <table>
+                <tr>
+                    <td>Movie Name:</td>
+                    <td>{{Title}}</td>
+                </tr>
+                <tr>
+                    <td>Released:</td>
+                    <td>{{Released}}</td>
+                </tr>
+                <tr>
+                    <td>Run Time:</td>
+                    <td>{{Runtime}}</td>
+                </tr>
+
+                <tr>
+                    <td>Genre:</td>
+                    <td>{{Genre}}</td>
+                </tr>
+                <tr>
+                    <td>Director:</td>
+                    <td>{{Director}}</td>
+                </tr>
+                <tr>
+                    <td>Writer:</td>
+                    <td>{{Writer}}</td>
+                </tr>
+                <tr>
+                    <td>Actors:</td>
+                    <td>{{Actors}}</td>
+                </tr>
+                <tr>
+                    <td>Languages:</td>
+                    <td>{{Language}}</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>{{Country}}</td>
+                </tr>
+                <tr>
+                    <td>Awards:</td>
+                    <td>{{Awards}}</td>
+                </tr>
+                <tr>
+                    <td>imdb Rating:</td>
+                    <td>{{imdbRating}}</td>
+                </tr>
+                <tr>
+                    <td>Plot:</td>
+                    <td>{{Plot}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

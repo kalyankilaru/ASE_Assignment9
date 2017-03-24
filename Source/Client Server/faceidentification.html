@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"
+            type="application/javascript"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <script>
+
+        function describePeople() {
+            var url = document.getElementById("imageUrl").value;
+            var classifyurl = "https://apius.faceplusplus.com/v2/detection/detect?url=" + url +
+                "&api_secret=XVGdcflrqvGcoL1GWUh2pM_bstHRsgXi&api_key=0621c5c25c3b4c4bd3ad8b3280cf3f97&attribute=glass,pose,gender,age,race,smiling";
+            $.ajax({
+                url: classifyurl,
+                success: function (response) {
+                    var image = '';
+                    image += "<img src='" + url + "' id='setImage'>";
+                    document.getElementById("image").innerHTML = image;
+                    var table = '';
+                    table += "<label id='setTable'>Face Detection Data</label><th id='setTable'>Gender</th><th>Age</th><th>Race</th><th>Smiling Value</th></tr></thead>";
+                    table += "<tbody>";
+                    for (var i = 0; i < response.face.length; i++) {
+                        table += "<tr><td id='setTable'>" + response.face[i].attribute.gender.value + "</td>";
+                        table += "<td>" + response.face[i].attribute.age.value + "</td>";
+                        table += "<td>" + response.face[i].attribute.race.value + "</td>";
+                        table += "<td>" + response.face[i].attribute.smiling.value + "</td></tr>";
+                    }
+                    table += "</tbody>";
+                    document.getElementById("data").innerHTML = table;
+                },
+                error: function () {
+                    console.log("false");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body style="background-image: url(images/background.jpg);background-repeat: no-repeat;background-size: cover">
+<nav class="navbar navbar-light bg-faded">
+    <div class="col-sm-10">
+        <h3 style="padding-left: 20px;">Face Detection</h3>
+    </div>
+    <a href="index.html" class="btn btn-link" id="logout" style="padding-top: 25px; font-weight: 900;font-size: 18px">Logout
+        <span>
+    <i class="glyphicon glyphicon-off"></i>
+    </span></a></br>
+
+</nav>
+<div class="form-group">
+    <div class="col-xs-6" style="padding-left: 30px;">
+        <input  class="form-control" id="imageUrl" type="text" placeholder="Enter URL" >
+    </div>
+    <button type="submit" onclick="describePeople()" class="btn btn-primary">Describe</button>
+</div>
+
+<div id="image"></div>
+
+<table class='table' id="data"></table>
+</body>
+</html>

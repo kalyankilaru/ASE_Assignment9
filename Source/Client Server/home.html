@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"
+            type="application/javascript"></script>
+
+</head>
+
+<body style="background-image: url(images/home.jpg);background-repeat: no-repeat;background-size: cover">
+<nav class="navbar navbar-light bg-faded">
+
+    <div class="col-sm-10">
+        <h2 style="padding-left: 20px;">Welcome</h2>
+    </div>
+    <a href="index.html" class="btn btn-link" id="logout" style="padding-top: 30px; font-weight: 900">Logout
+        <span>
+    <i class="glyphicon glyphicon-off"></i>
+    </span></a></br>
+
+</nav>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+        <br></br>
+        <div>
+            <span style="font-weight: 800;font-family: 'Microsoft Sans Serif'">Face Detection:</span>
+            <p>
+                Face detection is a technology being used in a variety of applications that identifies human
+                faces in digital images. They also give the details of the person like age, gender and color etc.
+            </p>
+            <button type="submit" class="btn" style="background-color:turquoise" id="faceDetection"
+                    onclick="location.href='faceidentification.html'">Face Detection
+            </button>
+        </div><br></br>
+        <div>
+            <span style="font-weight: 800;font-family: 'Microsoft Sans Serif'">Movie Information</span>
+            <p>
+                Gives the basic information of the movie, when the user searched for one.
+            </p>
+            <button type="submit" class="btn" id="textToSpeech" style="background-color:turquoise"
+                    onclick="location.href='movie.html'">Movie Info
+            </button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
